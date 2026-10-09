@@ -1,0 +1,13 @@
+# Generert ved kjøring – ikke i git
+logs/
+cache/
+libraries/
+versions/
+.paper/
+world/
+world_nether/
+world_the_end/
+session.lock
+console.log
+*.log.gz
+.DS_Store
