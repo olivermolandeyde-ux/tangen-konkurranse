@@ -10,18 +10,21 @@ ved siden av hovedserveren (25565).
   (samme spillversjon) + be en OP om OP-tilgang. Serverdelen (`plugins/`)
   er allerede installert.
 
-## Kom i gang på VPS
+## Kom i gang på VPS (én kommando, ingen porter)
+
+Vi bruker **playit.gg-tunnel** – du slipper ufw og Oracle-brannmur helt:
 
 ```bash
-git clone <denne-repoen> konkurranse
+git clone https://github.com/olivermolandeyde-ux/tangen-konkurranse.git konkurranse
 cd konkurranse
-sudo ufw allow 25566/tcp
-# + åpne 25566/TCP i Oracle Cloud ingress (samme sted som 25565)
-sudo cp konkurranse.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable --now konkurranse
+sudo ./setup-vps.sh
 ```
 
-Koble til: `<vps-ip>:25566`. Første spiller som joiteter må få OP av noen med
-konsoll: `op <navn>` (via `sudo journalctl -u konkurranse -f` for logg,
-eller `screen` + `start-vps.sh` hvis du vil ha konsoll).
+Skriptet installerer playit + starter serveren. Underveis ber det deg om å
+lage gratis konto på playit.gg, åpne claim-lenken (`playit setup`) og lage en
+TCP-tunnel mot port **25566**. Del tunnel-adressen
+(f.eks. `abc123.at.playit.gg:12345`) med spillerne.
+
+Koble til med **playit-adressen din**. Første spiller som jointer må få OP
+av noen med konsoll: `op <navn>` (se logg med `sudo journalctl -u konkurranse -f`,
+eller kjør `screen` + `./start-vps.sh` hvis du vil ha konsoll).
